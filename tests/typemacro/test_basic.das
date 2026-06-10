@@ -25,6 +25,9 @@ def test_grammar_forms(t : T?) {
         t |> equal(typeinfo typename(_a), "float[4]")
     }
     t |> run("$name<types>(args) form") @(t : T?) {
+        // spelled with spaces because das_source_formatter mangles the canonical
+        // `$tm_make<float>(...)` form (issue #3074) and CI's formatter --verify would
+        // reject it; same token stream either way. Restore canonical when #3074 fixes
         var _a : $tm_make < float > (4, true, "arr")
         t |> equal(typeinfo typename(_a), "float[4]")
     }
